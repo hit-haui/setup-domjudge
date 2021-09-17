@@ -20,7 +20,7 @@ Lấy judgehost password:
 sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret
 ```
 
-Thay password của biến JUDGEDAEMON_PASSWORD trong file docker-compose
+Thay password của các biến JUDGEDAEMON_PASSWORD trong file docker-compose
 
 Chạy các máy chấm judgehost(s):
 
@@ -28,18 +28,25 @@ Chạy các máy chấm judgehost(s):
 sudo docker-compose up -d
 ```
 
-DOMserver started: http://localhost
-
 Lấy password username admin:
 
 ```bash
 sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret
 ```
 
-Stop DOMjudge:
+Kiểm tra xem tất cả các container đã chạy hay chưa:
 
 ```bash
-sudo docker-compose down
+sudo docker-compose ps -a
+```
+
+DOMjudge started: http://localhost
+
+Ngoài tài khoản admin được tạo sẵn thì có tài khoản team member:
+
+```
+username: dummy
+password: dummy
 ```
 
 ### Hướng dẫn cài đặt DOMjudge thủ công
