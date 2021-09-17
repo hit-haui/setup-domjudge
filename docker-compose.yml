@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  dj-mariadb:
+    container_name: mariadb
+    image: mariadb
+    environment:
+      - CONTAINER_TIMEZONE=Asia/Bangkok
+      - TZ=Asia/Bangkok
+      - MYSQL_ROOT_PASSWORD=r54d9Kl2
+      - MYSQL_USER=domjudge
+      - MYSQL_PASSWORD=djpwH6f34e
+      - MYSQL_DATABASE=domjudge
+    ports:
+      - 13306:3306
+    command: --max-connections=1000 --max-allowed-packet=512M
+    volumes:
+      - /data/db:/var/lib/mysql
+
+  domserver:
+    container_name: domserver
+    image: domjudge/domserver
+    ports:
+      - 80:80
+    environment:
+      - CONTAINER_TIMEZONE=Asia/Bangkok
+      - TZ=Asia/Bangkok
+      - MYSQL_HOST=mariadb
+      - MYSQL_USER=domjudge
+      - MYSQL_DATABASE=domjudge
+      - MYSQL_PASSWORD=djpwH6f34e
+      - MYSQL_ROOT_PASSWORD=r54d9Kl2
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    links:
+      - dj-mariadb:mariadb
