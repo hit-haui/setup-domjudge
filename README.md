@@ -67,7 +67,7 @@ nano etc/apache.conf.in
 
 Sửa chỗ VirtualHost thành như sau:
 
-[image](https://user-images.githubusercontent.com/55653291/133781475-cfb12e44-9ce9-46ee-9596-6ddfaed4d37d.png)
+![image](https://user-images.githubusercontent.com/55653291/133781475-cfb12e44-9ce9-46ee-9596-6ddfaed4d37d.png)
 
 Bấm tổ hợp phím: Ctrl + O -> Enter -> Ctrl + X
 
@@ -140,6 +140,6 @@ Chạy máy chấm:
 
 Truy cập: http://localhost/jury/judgehosts
 
-[image](https://user-images.githubusercontent.com/55653291/133781565-6960e4fd-a38a-461d-a94d-a0aa1f71fc8f.png)
+![image](https://user-images.githubusercontent.com/55653291/133781565-6960e4fd-a38a-461d-a94d-a0aa1f71fc8f.png)
       
 Máy chấm đã được bật
