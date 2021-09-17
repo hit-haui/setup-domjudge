@@ -16,8 +16,6 @@ services:
     ports:
       - 13306:3306
     command: --max-connections=1000 --max-allowed-packet=512M
-    volumes:
-      - /data/db:/var/lib/mysql
 
   domserver:
     container_name: domserver
@@ -40,13 +38,16 @@ services:
       - dj-mariadb:mariadb
 
   judgehost:
-    container_name: judgehost
+    container_name: judgehost-0
     image: domjudge/judgehost:7.3.3
+    hostname: judgehost-0
     env_file:
       - .env
     environment:
       - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
       - DAEMON_ID=0
+      - JUDGEDAEMON_USERNAME=judgehost
+      - JUDGEDAEMON_PASSWORD=9GDxQUoHjVJUa0A6
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

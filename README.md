@@ -8,7 +8,21 @@ Clone project và mở terminal cd vào thư mục của project
 
 Tạo file .env và config tương tự file example.env
 
-Start DOMjudge:
+Start mariadb domserver trước để lấy JUDGEDAEMON_PASSWORD:
+
+```bash
+sudo docker-compose up -d dj-mariadb domserver
+```
+
+Lấy judgehost password:
+
+```bash
+sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret
+```
+
+Thay password của biến JUDGEDAEMON_PASSWORD trong file docker-compose
+
+Chạy các máy chấm judgehost(s):
 
 ```bash
 sudo docker-compose up -d
@@ -16,12 +30,10 @@ sudo docker-compose up -d
 
 DOMserver started: http://localhost
 
-Reset password username admin:
-
-##### Note: admin có thể thay thế là username khác
+Lấy password username admin:
 
 ```bash
-sudo docker exec -it domserver ./opt/domjudge/domserver/webapp/bin/console domjudge:reset-user-password admin
+sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret
 ```
 
 Stop DOMjudge:
@@ -141,5 +153,5 @@ Chạy máy chấm:
 Truy cập: http://localhost/jury/judgehosts
 
 ![image](https://user-images.githubusercontent.com/55653291/133781565-6960e4fd-a38a-461d-a94d-a0aa1f71fc8f.png)
-      
+
 Máy chấm đã được bật
