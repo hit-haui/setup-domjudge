@@ -3,14 +3,16 @@ version: "3"
 services:
   dj-mariadb:
     container_name: mariadb
-    image: mariadb
+    image: mariadb:10.6.4-focal
+    env_file:
+      - .env
     environment:
-      - CONTAINER_TIMEZONE=Asia/Bangkok
-      - TZ=Asia/Bangkok
-      - MYSQL_ROOT_PASSWORD=r54d9Kl2
+      - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
+      - TZ=${TZ}
       - MYSQL_USER=domjudge
-      - MYSQL_PASSWORD=djpwH6f34e
       - MYSQL_DATABASE=domjudge
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
       - 13306:3306
     command: --max-connections=1000 --max-allowed-packet=512M
@@ -19,18 +21,34 @@ services:
 
   domserver:
     container_name: domserver
-    image: domjudge/domserver
-    ports:
-      - 80:80
+    image: domjudge/domserver:7.3.3
+    env_file:
+      - .env
     environment:
-      - CONTAINER_TIMEZONE=Asia/Bangkok
-      - TZ=Asia/Bangkok
+      - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
+      - TZ=${TZ}
       - MYSQL_HOST=mariadb
       - MYSQL_USER=domjudge
       - MYSQL_DATABASE=domjudge
-      - MYSQL_PASSWORD=djpwH6f34e
-      - MYSQL_ROOT_PASSWORD=r54d9Kl2
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - ${SERVER_PORT}:80
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
     links:
       - dj-mariadb:mariadb
+
+  judgehost:
+    container_name: judgehost
+    image: domjudge/judgehost:7.3.3
+    env_file:
+      - .env
+    environment:
+      - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
+      - DAEMON_ID=0
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    links:
+      - domserver:domserver
