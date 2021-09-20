@@ -55,6 +55,19 @@ Xem password của database:
 sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/dbpasswords.secret
 ```
 
+### RESTful API
+
+Đối với mỗi request yêu cầu auth cần thêm vào header key và value:
+
+```bash
+php-auth-user=<username>
+php-auth-pw=<password>
+```
+
+##### Note: user phải có quyền submit code và các quyền cần thiết khác
+
+##### API Docs xem tại https://www.domjudge.org/documentation
+
 ### Hướng dẫn cài đặt DOMjudge thủ công
 
 #### Môi trường:
