@@ -47,7 +47,7 @@ services:
     environment:
       - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
       - DAEMON_ID=0
-      - JUDGEDAEMON_PASSWORD=kys0oVL3r7dKLmdq
+      - JUDGEDAEMON_PASSWORD=05Ge3HAR7R9FBaC1
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -55,7 +55,7 @@ services:
       - domserver:domserver
 
   # judgehost-1:
-  #   restart: always
+  #   restart: on-failure
   #   container_name: judgehost-1
   #   image: domjudge/judgehost:7.3.3
   #   hostname: judgedaemon-1
@@ -64,7 +64,7 @@ services:
   #   environment:
   #     - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
   #     - DAEMON_ID=1
-  #     - JUDGEDAEMON_PASSWORD=kys0oVL3r7dKLmdq
+  #     - JUDGEDAEMON_PASSWORD=05Ge3HAR7R9FBaC1
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
