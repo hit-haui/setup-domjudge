@@ -28,7 +28,7 @@ Chạy các máy chấm judgehost(s):
 sudo docker-compose up -d
 ```
 
-Lấy password username admin:
+Lấy password của user admin:
 
 ```bash
 sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret
