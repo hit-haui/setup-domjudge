@@ -2,7 +2,6 @@ version: "3"
 
 services:
   dj-mariadb:
-    restart: always
     container_name: mariadb
     image: mariadb:10.6.4-focal
     env_file:
@@ -19,7 +18,6 @@ services:
     command: --max-connections=1000 --max-allowed-packet=512M
 
   domserver:
-    restart: always
     container_name: domserver
     image: domjudge/domserver:7.3.3
     env_file:
@@ -40,7 +38,7 @@ services:
       - dj-mariadb:mariadb
 
   judgehost-0:
-    restart: always
+    restart: on-failure
     container_name: judgehost-0
     image: domjudge/judgehost:7.3.3
     hostname: judgedaemon-0
@@ -49,7 +47,7 @@ services:
     environment:
       - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
       - DAEMON_ID=0
-      - JUDGEDAEMON_PASSWORD=M5UMQpRMqP0eanOJ
+      - JUDGEDAEMON_PASSWORD=e6ma8UDMO2E1tvDA
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
