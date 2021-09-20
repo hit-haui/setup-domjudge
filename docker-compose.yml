@@ -47,7 +47,7 @@ services:
     environment:
       - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
       - DAEMON_ID=0
-      - JUDGEDAEMON_PASSWORD=e6ma8UDMO2E1tvDA
+      - JUDGEDAEMON_PASSWORD=kys0oVL3r7dKLmdq
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -64,7 +64,7 @@ services:
   #   environment:
   #     - CONTAINER_TIMEZONE=${CONTAINER_TIMEZONE}
   #     - DAEMON_ID=1
-  #     - JUDGEDAEMON_PASSWORD=M5UMQpRMqP0eanOJ
+  #     - JUDGEDAEMON_PASSWORD=kys0oVL3r7dKLmdq
   #   privileged: true
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro

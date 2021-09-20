@@ -49,6 +49,12 @@ username: dummy
 password: dummy
 ```
 
+Xem password của database:
+
+```bash
+sudo docker exec -it domserver cat /opt/domjudge/domserver/etc/dbpasswords.secret
+```
+
 ### Hướng dẫn cài đặt DOMjudge thủ công
 
 #### Môi trường:
