@@ -1,0 +1,57 @@
+﻿Phải cd đến thư mục vừa giải nén, file v1.4.rc1.tar.gz
+Cài các gói cần thiết:
+sudo apt-get install build-essential openjdk-8-jdk-headless fp-compiler postgresql postgresql-client python3.6 cppreference-doc-en-html cgroup-lite libcap-dev zip
+
+Cấp quyền:
+sudo python3 prerequisites.py install
+reboot
+Cài pip3:
+sudo apt install python3-pip
+
+Cài CMS:
+Lỗi: 
+sudo apt-get install python-psycopg2
+sudo apt-get install libpq-dev
+------------------------------------------------
+sudo pip3 install -r requirements.txt
+sudo python3 setup.py install
+Build CMS:
+python3 prerequisites.py build
+
+export PATH=$PATH:./isolate/
+export PYTHONPATH=./
+cp config/cms.conf.sample config/cms.conf
+cp config/cms.ranking.conf.sample config/cms.ranking.conf
+
+sudo useradd cmsuser
+sudo usermod -a -G cmsuser tungaqhd
+sudo chown root:cmsuser ./isolate/isolate
+sudo chmod u+s ./isolate/isolate
+Cấu hình DB: (mở postgres – tạo user – tạo db – cấp quyền)
+sudo su – postgres
+createuser --username=postgres --pwprompt cmsuser
+createdb --username=postgres --owner=cmsuser cmsdb
+psql --username=postgres --dbname=cmsdb --command='ALTER SCHEMA public OWNER TO cmsuser'
+psql --username=postgres --dbname=cmsdb --command='GRANT SELECT ON pg_largeobject TO cmsuser'
+nano config/cms.conf:
+sửa dòng: "database": "postgresql+psycopg2://cmsuser:your_password_here@localhost:5432/cmsdb",
+psql –U postgres
+Buil lại:
+sudo python3 prerequisites.py install
+Build DB:
+Lỗi: reboot
+cmsInitDB
+Tạo admin:
+cmsAddAdmin name
+cmsAdminWebServer
+Chạy log:
+cmsLogService
+Chạy các services:
+cmsResourceService -a
+Chạy giao diện user:
+cmsContestWebServer
+
+Admin port: localhost:8889
+User port: localhost:8888
+
+
